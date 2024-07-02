@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cr2ro2g0j264f"]
+[gd_scene load_steps=11 format=3 uid="uid://cr2ro2g0j264f"]
 
 [ext_resource type="Script" path="res://Player Scene-Scripts/Player.gd" id="1_s14k8"]
 [ext_resource type="PackedScene" uid="uid://n3b5o2epapa0" path="res://UI Scene-Scripts/ui.tscn" id="2_vtg7w"]
@@ -16,6 +16,44 @@ sky = SubResource("Sky_087hy")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="Animation" id="Animation_wfysv"]
+resource_name = "bob"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.504297, 0), Vector3(0, 0.6, 0), Vector3(0, 0.5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yn73x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.504297, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vonmc"]
+_data = {
+"RESET": SubResource("Animation_yn73x"),
+"bob": SubResource("Animation_wfysv")
+}
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bwrct"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_okdta"]
@@ -32,18 +70,21 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.49553, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.504297, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00794923, -0.00259972, 0)
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head"]
+libraries = {
+"": SubResource("AnimationLibrary_vonmc")
+}
+
 [node name="UI" parent="." instance=ExtResource("2_vtg7w")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.71591, 0)
 layers = 2
 mesh = SubResource("CapsuleMesh_bwrct")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.71591, 0)
 shape = SubResource("CapsuleShape3D_okdta")
