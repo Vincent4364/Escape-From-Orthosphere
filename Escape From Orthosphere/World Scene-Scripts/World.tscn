@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://dhho6q78fbilg"]
+[gd_scene load_steps=23 format=3 uid="uid://dhho6q78fbilg"]
 
 [ext_resource type="PackedScene" uid="uid://cr2ro2g0j264f" path="res://Player Scene-Scripts/player.tscn" id="1_g3di0"]
+[ext_resource type="PackedScene" uid="uid://b3ondab8d4f0i" path="res://Assets/Sci-fi weaponry/SciFi_Rifle.glb" id="2_nelmt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yr1bj"]
 albedo_color = Color(0.678431, 0.305882, 0.564706, 1)
@@ -153,3 +154,6 @@ mesh = SubResource("BoxMesh_jqo3k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D7/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_vgar5")
+
+[node name="Sci-fi Rifle-gun+cell" parent="." instance=ExtResource("2_nelmt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.0253, 0.987254, 23.5067)
