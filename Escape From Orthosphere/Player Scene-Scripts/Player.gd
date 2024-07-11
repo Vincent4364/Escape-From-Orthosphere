@@ -13,7 +13,8 @@ var can_move = true
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
-@onready var shoot_anim = $Head/Camera3D/SciFi_Rifle/AnimationPlayer
+@onready var SciFi_Rifle = $Head/SciFi_Rifle
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -65,7 +66,8 @@ func _physics_process(delta):
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
 	
 	if Input.is_action_pressed("Shoot"):
-		Global.shoot_anim.play("shoot")
+		SciFi_Rifle.get_node("AnimationPlayer").play("shoot")
+		
 	
 		
 
