@@ -1,0 +1,11 @@
+Model Information:
+* title:	Horror Monster
+* source:	https://sketchfab.com/3d-models/horror-monster-1dbd7d0a89274df08697314d694e090a
+* author:	GerardoA400 (https://sketchfab.com/GerardoA400)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Horror Monster" (https://sketchfab.com/3d-models/horror-monster-1dbd7d0a89274df08697314d694e090a) by GerardoA400 (https://sketchfab.com/GerardoA400) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
