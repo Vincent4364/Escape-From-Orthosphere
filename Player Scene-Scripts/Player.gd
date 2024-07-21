@@ -16,7 +16,7 @@ var can_move = true
 @onready var SciFi_Rifle = $Head/Camera3D/SciFi_Rifle
 @onready var aim_ray = $Head/Camera3D/AimRay
 @onready var anim_player = $Head/Camera3D/AnimationPlayer
-
+@onready var rifle_anim_player = $Head/Camera3D/SciFi_Rifle/AnimationPlayer
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
