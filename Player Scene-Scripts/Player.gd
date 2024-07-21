@@ -11,12 +11,19 @@ const SENSITIVITY = 0.003
 var gravity = 9.8
 var can_move = true
 
+#scifi-rifle variables
+@export var ammo = 100
+@export var ammo_full = true
+@export var ammo_empty = false
+@export var can_shoot = true
+
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var SciFi_Rifle = $Head/Camera3D/SciFi_Rifle
 @onready var aim_ray = $Head/Camera3D/AimRay
 @onready var anim_player = $Head/Camera3D/AnimationPlayer
 @onready var rifle_anim_player = $Head/Camera3D/SciFi_Rifle/AnimationPlayer
+@onready var timer = $Timer
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -30,6 +37,26 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	
+	if ammo == 100:
+		ammo_full = true
+	else:
+		ammo_full = false
+		
+	if ammo == 0:
+		ammo_empty = true
+		can_shoot = false
+	else:
+		ammo_empty = false
+		
+	if Input.is_action_pressed("reload"):
+		if !ammo_full:
+			rifle_anim_player.play("reload")
+			timer.start()
+			print("reloading")
+			can_shoot = false
+		else:
+			print("gun is full")
 		
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -42,8 +69,10 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("Left","Right","Forward","Backwards")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
+	if rifle_anim_player.is_playing():
+		print("anim is playing")
+	
 	if is_on_floor():
-		print(float(is_on_floor()))
 		if direction: 
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
@@ -72,15 +101,23 @@ func _physics_process(delta):
 	
 func shoot():
 	if Input.is_action_pressed("Shoot"):
-		SciFi_Rifle.get_node("AnimationPlayer").play("shoot")
+		if !ammo_empty and can_shoot:
+			rifle_anim_player.play("shoot")
+			ammo -= 1
+			print(ammo)
 	else:
-		SciFi_Rifle.get_node("AnimationPlayer").stop()
+		rifle_anim_player.stop()
 	if aim_ray.is_colliding():
 		if aim_ray.get_collider().is_in_group("enemy"):
 			aim_ray.get_collider().hit()
+		
+
+func _on_timer_timeout():
+	ammo = 100
+	print("reloaded!")
+	can_shoot = true
 			
 		
-	
 #
 #@onready var ui_script = $UI
 #@onready var raycast = $Camera3D/RayCast3D
@@ -136,3 +173,4 @@ func shoot():
 	#print(Global.player_health)
 	#if Global.player_health <= 0:
 		#get_tree().quit()
+
