@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b3ondab8d4f0i"
-path="res://.godot/imported/SciFi_Rifle.glb-40a376f82320d62d153b1d3d3d79b22d.scn"
+uid="uid://cynvmngo5utnj"
+path="res://.godot/imported/EnergyCell.glb-c802a793c66a05b9c02e265d82a049f2.scn"
 
 [deps]
 
-source_file="res://Assets/Sci-fi weaponry/SciFi_Rifle.glb"
-dest_files=["res://.godot/imported/SciFi_Rifle.glb-40a376f82320d62d153b1d3d3d79b22d.scn"]
+source_file="res://Assets/rifle assets/EnergyCell.glb"
+dest_files=["res://.godot/imported/EnergyCell.glb-c802a793c66a05b9c02e265d82a049f2.scn"]
 
 [params]
 
