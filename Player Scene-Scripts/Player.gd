@@ -23,6 +23,7 @@ var can_move = true
 @onready var aim_ray = $Head/Camera3D/AimRay
 @onready var anim_player = $Head/Camera3D/AnimationPlayer
 @onready var rifle_anim_player = $Head/Camera3D/SciFi_Rifle/RifleAnimPlayer
+@onready var gun_bob_anim = $Head/Camera3D/SciFi_Rifle/gun_bob
 @onready var timer = $Timer
 
 func _ready():
@@ -75,14 +76,21 @@ func _physics_process(delta):
 			
 		if input_dir.y > 0:
 			anim_player.play("bob")
+			gun_bob_anim.play("gun_bob")
 		elif input_dir.y < 0:
 			anim_player.play("bob")
+			gun_bob_anim.play("gun_bob")
 		elif input_dir.x > 0:
 			anim_player.play("bob")
+			gun_bob_anim.play("gun_bob")
 		elif input_dir.x < 0:
 			anim_player.play("bob")
+			gun_bob_anim.play("gun_bob")
 		else:
 			anim_player.stop()
+			gun_bob_anim.stop()
+	
+	
 		
 	else:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 3.0)
