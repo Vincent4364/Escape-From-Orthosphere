@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cynvmngo5utnj"
-path="res://.godot/imported/EnergyCell.glb-c802a793c66a05b9c02e265d82a049f2.scn"
+uid="uid://bq2mkthan156i"
+path="res://.godot/imported/energy_cell.glb-1756c1510225504b49d00ae25a8b9044.scn"
 
 [deps]
 
-source_file="res://Assets/rifle assets/EnergyCell.glb"
-dest_files=["res://.godot/imported/EnergyCell.glb-c802a793c66a05b9c02e265d82a049f2.scn"]
+source_file="res://Assets/rifle assets/energy_cell.glb"
+dest_files=["res://.godot/imported/energy_cell.glb-1756c1510225504b49d00ae25a8b9044.scn"]
 
 [params]
 

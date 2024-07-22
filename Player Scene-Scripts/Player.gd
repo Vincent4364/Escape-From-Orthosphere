@@ -22,13 +22,11 @@ var can_move = true
 @onready var SciFi_Rifle = $Head/Camera3D/SciFi_Rifle
 @onready var aim_ray = $Head/Camera3D/AimRay
 @onready var anim_player = $Head/Camera3D/AnimationPlayer
-@onready var rifle_anim = $Head/Camera3D/SciFi_Rifle/RifleAnimPlayer
+@onready var rifle_anim_player = $Head/Camera3D/SciFi_Rifle/RifleAnimPlayer
 @onready var timer = $Timer
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	if rifle_anim:
-		print("hi")
 	
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -51,14 +49,7 @@ func _physics_process(delta):
 	else:
 		ammo_empty = false
 		
-	if Input.is_action_pressed("reload"):
-		if !ammo_full:
-			rifle_anim.play("reload")
-			timer.start()
-			print("reloading")
-			can_shoot = false
-		else:
-			print("gun is full")
+	
 		
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -71,7 +62,7 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("Left","Right","Forward","Backwards")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	if rifle_anim.is_playing():
+	if rifle_anim_player.is_playing():
 		print("anim is playing")
 	
 	if is_on_floor():
@@ -97,6 +88,7 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 3.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
 	
+	reload()
 	shoot()
 	move_and_slide()
 	
@@ -104,14 +96,23 @@ func _physics_process(delta):
 func shoot():
 	if Input.is_action_pressed("Shoot"):
 		if !ammo_empty and can_shoot:
-			rifle_anim.play("shoot")
+			rifle_anim_player.play("shoot")
 			ammo -= 1
 			print(ammo)
-	else:
-		rifle_anim.stop()
 	if aim_ray.is_colliding():
 		if aim_ray.get_collider().is_in_group("enemy"):
 			aim_ray.get_collider().hit()
+			
+
+func reload():
+	if Input.is_action_just_pressed("reload"):
+		if !ammo_full:
+			rifle_anim_player.play("reload")
+			timer.start()
+			print("reloading")
+			can_shoot = false
+		else:
+			print("gun is full")
 		
 
 func _on_timer_timeout():
